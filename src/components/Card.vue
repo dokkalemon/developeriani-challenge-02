@@ -2,19 +2,34 @@
     <section class="card-container">
         <div class="card">
             <div class="card-image">
-                <img src="../assets/image-equilibrium.jpg" alt="">
+                <img :src="require(`../assets/${thumb}`)" alt="">
                 <div class="card-image-philter">
                     <img src="../assets/icon-view.svg" alt="">
                 </div>
             </div>
             <div class="card-info">
                 <div class="card-title">
-                    <h1>Equilibrium #3429</h1>
+                    <h2>{{ title }}</h2>
                 </div>
                 <div class="card-text">
-                    <p>Our Equilibrium collection promotes balance and calm</p>
+                    <p>{{ text }}</p>
                 </div>
+                <div class="card-value">
+                    <div class="card-item">
+                        <img :src="require(`../assets/${logoValue}`)" alt="">
+                        <span>{{ value }} {{ typeValue }}</span>
+                    </div>
+                    <div class="card-item">
+                        <img src="../assets/icon-clock.svg" alt="">
+                        <span>{{ time }}</span>
+                    </div>
+                </div>
+                <div class="card-line"></div>
 
+                <div class="card-user">
+                    <img :src="require(`../assets/${avatar}`)" alt="">
+                    <span>Creation of <a :href="`${url}`">{{ name }}</a></span>
+                </div>
 
             </div>
 
@@ -26,7 +41,21 @@
 <script>
 
 export default {
-    name: 'Card'
+    name: 'Card',
+
+    props: {
+        thumb: String,
+        title: String,
+        text: String,
+        logoValue: String,
+        value: String,
+        typeValue: String,
+        time: String,
+        avatar: String,
+        name: String,
+        utl: String
+
+    }
 }
 </script>
 
@@ -44,6 +73,7 @@ export default {
         background-color: $card-back;
         border-radius: 15px;
         padding: 24px;
+        cursor: pointer;
     }
     .card-image {
         height: 302px;
@@ -79,21 +109,131 @@ export default {
         height: 100%;
         width: 100%;
         .card-title {
-            padding: 30px 0px;
-            font-weight: 400;
-            h1 {
+            padding: 30px 0px 20px 0;
+            font-weight: 300;
+            h2 {
                 font-size: 22px;
+                transition: all .4s ease
+            }
+        }
+        .card-text {
+            p {
+                font-size: 16px;
+                font-weight: 300;
+                color: $soft-blue;
+                padding: 0 0 30px 0
+            }
+        }
+        .card-value {
+            height: 30px;
+            width: 100%;
+            display: flex;
+            padding-bottom: 30px;
+
+            .card-item {
+
+                height: 100%;
+                width:100%;
+                display: flex;
+                align-items: center;
+                img {
+                    margin-right: 5px;
+                }
+                &:first-child {
+                    justify-content: flex-start;
+                    span {
+                        color: $cyan;
+                    }
+                }
+                &:last-child {
+                    justify-content: flex-end;
+                    span {
+                        color: $soft-blue;
+                        font-weight: 300;
+                    }
+                }
             }
             
         }
 
+        .card-line {
+            height: 1px;
+            width: 100%;
+            background-color: $card-line;
+            margin-bottom: 16px;
+        }
+
+        .card-user {
+            height: 33px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            img {
+                height: 100%;
+                border: 1px solid $white;
+                border-radius: 100%;
+                margin-right: 20px;
+            }
+            span {
+                color: $soft-blue;
+                font-weight: 300;
+                a {
+                    color: white;
+                    text-decoration: none;
+                    transition: all .4s ease
+                }
+            }
+        }
+
     }
     &:hover {
+        .card-user {
+            span {
+                a {
+                    color: $cyan;
+                }
+            }
+        }
         transform: scale(1.05);
         .card-image-philter {
             opacity: 1;
+        }
+        .card-title {
+        h2 {
+            color: $cyan
+        }
+    }
+}
+}
+
+@media screen and (max-width: 375px) {
+    .card-container {
+        height: 553px;
+        width: 237;
+        .card {
+            .card-image {
+                height: 278px
+            }
+            .card-value {
+                .card-item {
+                    span {
+                        font-size: 15px;
+                    }
+                }
+            }
+            .card-user {
+                height: 25px;
+                padding-bottom: 5px;
+                span {
+                    font-size: 15px;
+                }
+            }
         }
     }
 }
 
 </style>
+
+
+
+

@@ -1,6 +1,17 @@
 <template>
   <div id="app">
-    <Card />
+    <Card v-for="(item, index) in infoCard" :key="`card${index}`"
+    :thumb="item.thumb"
+    :title="item.title"
+    :text="item.text"
+    :logoValue="item.logoValue"
+    :value="item.value"
+    :typeValue="item.typeValue"
+    :time="item.time"
+    :avatar="item.avatar"
+    :name="item.name"
+    :url="item.url"
+    />
     
 
   </div>
@@ -13,6 +24,26 @@ export default {
   name: 'App',
   components: {
     Card
+  },
+
+  data() {
+    return {
+      infoCard: [
+        {
+          thumb: 'image-equilibrium.jpg',
+          title: 'Equilibrium #3429',
+          text: 'Our Equilibrium collection promotes balance and calm.',
+          logoValue: 'icon-ethereum.svg',
+          value: '0.041',
+          typeValue: 'ETH',
+          time: '3 days left',
+          avatar: 'image-avatar.png',
+          name: 'Jules Wyvern',
+          url: 'https://github.com/dokkalemon'
+        },
+        
+        ]
+    }
   }
 }
 </script>
